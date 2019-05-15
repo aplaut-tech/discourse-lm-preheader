@@ -6,15 +6,15 @@ import { h } from 'virtual-dom';
 createWidget('lm-preheader-user-login-buttons', {
   tagName: 'div.login-buttons',
 
-  click (e) {
-    e.preventDefault();
-    this.sendWidgetAction(this.attrs.action);
-  },
+  // click (e) {
+  //   e.preventDefault();
+  //   this.sendWidgetAction(this.attrs.action);
+  // },
 
   html (attrs, state) {
     return [
-      h('a.login-button', 'Войти'),
-      h('a.signup-button', 'Регистрация')
+      h('a.login-button', {href: Discourse.getURL("/login")}, 'Войти'),
+      h('a.signup-button', {href: Discourse.getURL("/signup")}, 'Регистрация')
     ];
   }
 });
@@ -91,7 +91,7 @@ export default createWidget('lm-preheader-user-panel', {
     } else {
       content.push(
         this.attach('lm-preheader-user-login-buttons', {
-          action: 'login'
+          // action: 'login'
         })
       );
     }
@@ -107,10 +107,10 @@ export default createWidget('lm-preheader-user-panel', {
     this.closeMenu();
   },
 
-  login () {
-    const returnPath = encodeURIComponent(window.location.pathname);
-    window.location = Discourse.getURL('/session/sso?return_path=' + returnPath);
-  },
+  // login () {
+  //   const returnPath = encodeURIComponent(window.location.pathname);
+  //   window.location = Discourse.getURL('/session/sso?return_path=' + returnPath);
+  // },
 
   logout () {
     this.container.lookup('route:application').send('logout')
